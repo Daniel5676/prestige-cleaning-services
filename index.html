@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creative Studio — Elevated Design</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" />
   <style>
     :root {
@@ -20,51 +23,21 @@
       --transition: all 0.3s ease;
     }
 
-    /* Reset + Base */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
     body {
-      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      font-family: 'Inter', sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.5;
       font-size: clamp(16px, 1.6vw, 18px);
       -webkit-font-smoothing: antialiased;
     }
-    img { max-width: 100%; height: auto; object-fit: cover; }
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: clamp(16px, 3vw, 24px); }
 
-    /* Utilities */
-    .sr-only {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0);
-    }
-    .muted { color: var(--muted); }
-    .shadow-sm { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
-    .shadow-md { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
-    .rounded { border-radius: var(--radius); }
-    .rounded-full { border-radius: 9999px; }
-    .border { border: 1px solid var(--border); }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-      padding: 0.75rem 1.5rem; border: 1px solid transparent; background: var(--black); color: var(--white);
-      border-radius: 9999px; font-weight: 600; font-size: 0.95rem; cursor: pointer;
-      transition: var(--transition); will-change: transform, background;
-    }
-    .btn:hover { background: var(--accent); transform: translateY(-2px); }
-    .btn:active { transform: translateY(0); }
-    .btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-    .btn-ghost { background: transparent; border-color: transparent; }
-    .animate-in {
-      opacity: 0; transform: translateY(20px); animation: fadeIn 0.6s ease-out forwards;
-    }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    .wrap { max-width: var(--wrap); padding-inline: clamp(16px, 3vw, 24px); }
 
     /* Progress Bar */
     .progress {
       position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); width: 0;
-      z-index: 100; transition: width 0.3s ease;
+      z-index: 1000; transition: width 0.3s ease;
     }
 
     /* Header */
@@ -72,40 +45,13 @@
       position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
     }
-    .nav {
-      display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 16px 0;
-    }
     .brand { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; }
-    .links {
-      display: none; gap: 1.5rem; font-size: 0.95rem; font-weight: 500;
-    }
-    .links a { transition: color 0.2s ease; }
-    .links a:hover { color: var(--accent); }
-    .menu-btn { display: inline-flex; font-size: 1.2rem; }
-    @media (min-width: 768px) {
-      .links { display: flex; }
-      .menu-btn { display: none; }
-    }
-    .drawer {
-      display: none; padding: 16px 0; border-top: 1px solid var(--border);
-    }
-    .drawer a { display: block; padding: 12px 0; font-size: 1rem; transition: color 0.2s ease; }
-    .drawer a:hover { color: var(--accent); }
-    .drawer.open { display: block; animation: slideIn 0.3s ease-out; }
-    @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* Hero */
-    .hero {
-      display: grid; grid-template-columns: 1fr; gap: var(--space); padding: calc(var(--space) * 1.5) 0;
-    }
     .hero h1 {
-      font-size: clamp(40px, 7vw, 80px); line-height: 1.1; margin: 0 0 8px; font-weight: 900; letter-spacing: -0.03em;
+      font-size: clamp(40px, 7vw, 80px); line-height: 1.1; font-weight: 900; letter-spacing: -0.03em;
     }
     .hero p { font-size: clamp(16px, 1.8vw, 18px); max-width: 600px; }
-    .hero .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
-    @media (min-width: 1024px) {
-      .hero { grid-template-columns: 1.2fr 1fr; align-items: center; }
-    }
 
     /* Category Bands */
     .bands { background: #f8fafc; border-block: 1px solid var(--border); }
@@ -113,7 +59,6 @@
       position: relative; height: min(50vh, 600px); min-height: 320px; overflow: hidden;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), var(--image);
       background-size: cover; background-position: center; transition: transform 0.6s ease;
-      will-change: transform;
     }
     .band:hover { transform: scale(1.02); }
     .band .title {
@@ -121,189 +66,64 @@
       padding-inline: clamp(16px, 3vw, 24px);
     }
     .band h3 {
-      color: var(--white); font-size: clamp(32px, 5vw, 64px); font-weight: 800; letter-spacing: 0.05em; margin: 0;
+      color: var(--white); font-size: clamp(32px, 5vw, 64px); font-weight: 800; letter-spacing: 0.05em;
       text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
     .band .circle {
-      width: 48px; height: 48px; background: var(--white); color: var(--black); border-radius: 9999px;
+      width: 48px; height: 48px; background: var(--white); color: var(--black); border-radius: 50%;
       display: grid; place-items: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: var(--transition);
     }
     .band .circle:hover { transform: scale(1.1); background: var(--accent); color: var(--white); }
 
     /* Projects */
     .projects { padding: calc(var(--space) * 2) 0; }
-    .projects .header {
-      display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 24px;
-    }
-    .projects h2 { font-size: clamp(28px, 4vw, 40px); margin: 0; }
-    .grid {
-      display: grid; grid-template-columns: 1fr; gap: 24px;
-    }
-    @media (min-width: 1024px) {
-      .grid { grid-template-columns: 1.3fr 1fr; }
-    }
-    .card {
-      position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius);
-      background: var(--white); transition: var(--transition); will-change: transform;
-    }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12); }
+    .projects h2 { font-size: clamp(28px, 4vw, 40px); }
     .ph {
-      height: 400px; background: radial-gradient(120% 100% at 100% 0%, #f0f7ff 0%, #ffeef3 40%, #fff6e8 70%, #ffffff 100%);
-      transition: transform 0.6s ease; will-change: transform;
+      height: clamp(200px, 25vw, 300px); background-size: cover; background-position: center;
+      transition: transform 0.6s ease;
     }
     .card:hover .ph { transform: scale(1.03); }
-    .thumb-row { display: grid; grid-template-rows: 1fr 1fr; gap: 24px; }
-    .thumb-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .ph.small { height: 200px; }
+    .ph.small { height: clamp(100px, 12.5vw, 150px); }
     .view {
-      position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
     }
     .card:hover .view { opacity: 1; }
     .view .pill {
       background: rgba(0, 0, 0, 0.75); color: var(--white); padding: 8px 16px; border-radius: 9999px;
       font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; backdrop-filter: blur(6px);
     }
-    .project-footer {
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 16px;
+    .vip-label {
+      background: rgba(255, 215, 0, 0.9); color: #0a0a0a; padding: 6px 12px; border-radius: 9999px;
+      font-size: clamp(0.7rem, 1.5vw, 0.8rem); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; transform: translateY(10px);
     }
+    .card:hover .view .vip-label { opacity: 1; transform: translateY(0); }
 
     /* Contact */
     .contact { background: #f8fafc; border-top: 1px solid var(--border); padding: calc(var(--space) * 2) 0; }
-    .contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space); }
-    @media (min-width: 1024px) {
-      .contact-grid { grid-template-columns: 1.2fr 1fr; }
-    }
-    .contact-form {
-      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px;
-    }
-    .field { display: flex; flex-direction: column; margin-bottom: 16px; }
-    .label { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
-    .input, .textarea {
-      border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; font: inherit; outline: none;
-      transition: border-color 0.2s ease;
-    }
-    .input:focus, .textarea:focus { border-color: var(--accent); }
-    .textarea { min-height: 140px; resize: vertical; }
+    .contact h2 { font-size: clamp(32px, 5vw, 52px); }
+    .contact-form { padding: 24px; }
 
-    /* Footer */
-    footer { background: var(--black); color: var(--white); padding: 24px 0; }
-    .foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .foot a { opacity: 0.7; transition: opacity 0.2s ease; }
-    .foot a:hover { opacity: 1; }
-
-    /* Reference Drawer */
-    details.ref {
-      position: fixed; right: 16px; bottom: 16px; width: min(360px, 90vw); z-index: 40;
-      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    /* Pop-Up */
+    .popup {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7);
+      display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    details.ref summary { padding: 12px 16px; font-weight: 600; cursor: pointer; }
-    .ref .inner { max-height: 70vh; overflow: auto; border-top: 1px solid var(--border); }
-    .ref img { width: 100%; height: auto; }
+    .popup.active { opacity: 1; visibility: visible; }
+    .popup-content {
+      background: var(--white); border-radius: var(--radius); padding: clamp(24px, 3vw, 32px);
+      max-width: min(90vw, 500px); text-align: center; transform: translateY(20px);
+      animation: popupFadeIn 0.4s ease-out forwards;
+    }
+    @keyframes popupFadeIn { to { transform: translateY(0); opacity: 1; } }
 
-    .grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(12px, 2vw, 16px);
-}
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(16px, 2.5vw, 20px);
-  }
-}
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: 1.3fr 1fr;
-    gap: clamp(20px, 3vw, 24px);
-  }
-}
-.card {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--white);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform;
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-}
-.ph {
-  height: clamp(200px, 25vw, 300px); /* Responsive height */
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.6s ease;
-  will-change: transform;
-}
-.card:hover .ph {
-  transform: scale(1.03);
-}
-.ph.small {
-  height: clamp(100px, 12.5vw, 150px); /* Smaller height for thumb-pair */
-}
-.thumb-row {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 2vw, 16px);
-}
-.thumb-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(12px, 2vw, 16px);
-}
-@media (max-width: 767px) {
-  .thumb-pair {
-    grid-template-columns: 1fr; /* Stack on mobile */
-    gap: clamp(10px, 1.5vw, 12px);
-  }
-}
-.view {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.card:hover .view {
-  opacity: 1;
-}
-.view .pill {
-  background: rgba(0, 0, 0, 0.75);
-  color: var(--white);
-  padding: 8px 16px;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  backdrop-filter: blur(6px);
-}
-.vip-label {
-  background: rgba(255, 215, 0, 0.9); /* Gold background for VIP */
-  color: #0a0a0a;
-  padding: 6px 12px;
-  border-radius: 9999px;
-  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: translateY(10px);
-}
-.card:hover .view .vip-label {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+    /* Animations */
+    .animate-in {
+      opacity: 0; transform: translateY(20px); animation: fadeIn 0.6s ease-out forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -312,307 +132,257 @@
 
   <!-- Header -->
   <header>
-    <div class="wrap nav">
-      <div class="brand" aria-label="Logo">prestiged</div>
-      <nav class="links" aria-label="Primary">
-        <a href="#services">Home</a>
-        <a href="#work">partnership</a>
-        <a href="#services">services</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div style="display: flex; gap: 0.75rem; align-items: center;">
-        <button class="btn btn-outline" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })">
-          Let’s Talk <span aria-hidden="true">↗</span>
+    <nav class="navbar navbar-expand-md wrap">
+      <div class="container-fluid">
+        <a class="navbar-brand brand" href="#" aria-label="Logo">prestiged</a>
+        <button class="navbar-toggler btn-ghost" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span>☰</span>
         </button>
-        <button id="menuToggle" class="btn btn-ghost" aria-label="Open menu">☰</button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item"><a class="nav-link" href="#services">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#work">Partnership</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+          <button class="btn btn-outline ms-md-3" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })">
+            Let’s Talk <span aria-hidden="true">↗</span>
+          </button>
+        </div>
       </div>
-    </div>
-    <div id="drawer" class="wrap drawer" aria-label="Mobile menu">
-      <a href="#services">Home</a>
-        <a href="#work">partnership</a>
-        <a href="#services">services</a>
-        <a href="#contact">Contact</a>
-    </div>
+    </nav>
   </header>
 
   <!-- Hero -->
   <section class="wrap hero animate-in" id="hero" aria-label="Hero">
-    <div>
-      <h1>Our Cleaning<br />Services</h1>
-    </div>
-    <div>
-      <p class="muted">
-        Prestige Cleaning Services is a digitally-driven company that delivers cleaning solutions using advanced techniques and modern technology. Their services are automated, tech-enabled, and designed to be innovative and efficient.
-      </p>
-      <div class="actions">
-        <a class="btn" href="#ref">Our vision</a>
-        <a class="btn btn-outline" href="#services">Our Services</a>
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <h1>Our Cleaning<br />Services</h1>
+      </div>
+      <div class="col-lg-5">
+        <p class="text-muted">
+          Prestige Cleaning Services is a digitally-driven company that delivers cleaning solutions using advanced techniques and modern technology. Their services are automated, tech-enabled, and designed to be innovative and efficient.
+        </p>
+        <div class="d-flex gap-3 flex-wrap mt-3">
+          <a class="btn" href="#ref">Our Vision</a>
+          <a class="btn btn-outline" href="#services">Our Services</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Category Bands -->
   <section class="bands" id="services" aria-label="Service categories">
-  <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgL6XK_HfIRCvWv2vYa-CZ9Va2ouxua9aukzicgXpo3AKTeH7ibThOKGx_ayBYsgd-_xxJx_yPLcbKiyqgYDzaDpPzyvtqM-HuVhs7gLp7XpYdHKnpx1EkvIFHfoyFsK3f1w_EOvnhRosvk8H9rTUngWpE7_9JO9xX2uoAIGKzSrysO4IT2qV67H86c5i_-/s320/home%20cleaning%20services.webp');">
-    <div class="title wrap">
-      <h3>Home-cleaning</h3>
-      <span class="circle" aria-hidden="true">↗</span>
+    <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgL6XK_HfIRCvWv2vYa-CZ9Va2ouxua9aukzicgXpo3AKTeH7ibThOKGx_ayBYsgd-_xxJx_yPLcbKiyqgYDzaDpPzyvtqM-HuVhs7gLp7XpYdHKnpx1EkvIFHfoyFsK3f1w_EOvnhRosvk8H9rTUngWpE7_9JO9xX2uoAIGKzSrysO4IT2qV67H86c5i_-/s320/home%20cleaning%20services.webp');">
+      <div class="title wrap">
+        <h3>Home-cleaning</h3>
+        <span class="circle" aria-hidden="true">↗</span>
+      </div>
     </div>
-  </div>
-  <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqwdMBrfcEXQszcSTm4R_CJ9z2pqBppF84agwQKq4Ur46ZYlACthMiFAG8_kNnHb7TA_7_YaX_dmWAkm5UHlLYKQfk7n32-T-l3t5u2zKybz6v_94Xp6TAdom2Ci8VDsd3cHaH_6pzmvRiZ2xOxZXQI2n9E-YYVwvmLh93DNvHNjhCDd5-CObbsKuaW1Y9/s320/professional%20cleaning%20service.jpg');">
-    <div class="title wrap">
-      <h3>Office-Cleaning</h3>
-      <span class="circle" aria-hidden="true">↗</span>
+    <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqwdMBrfcEXQszcSTm4R_CJ9z2pqBppF84agwQKq4Ur46ZYlACthMiFAG8_kNnHb7TA_7_YaX_dmWAkm5UHlLYKQfk7n32-T-l3t5u2zKybz6v_94Xp6TAdom2Ci8VDsd3cHaH_6pzmvRiZ2xOxZXQI2n9E-YYVwvmLh93DNvHNjhCDd5-CObbsKuaW1Y9/s320/professional%20cleaning%20service.jpg');">
+      <div class="title wrap">
+        <h3>Office-Cleaning</h3>
+        <span class="circle" aria-hidden="true">↗</span>
+      </div>
     </div>
-  </div>
-  <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1563453392212-326f5e854473?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
-    <div class="title wrap">
-      <h3>Cleaning-Post-construction sites</h3>
-      <span class="circle" aria-hidden="true">↗</span>
+    <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1563453392212-326f5e854473?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+      <div class="title wrap">
+        <h3>Cleaning-Post-construction sites</h3>
+        <span class="circle" aria-hidden="true">↗</span>
+      </div>
     </div>
-  </div>
-  <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvEuAaKw5VQJldp61ZcOaUOngUMyAGvNVLEJ0faOihmJPOUnDxzAZFcgTg6qhyN40MpgTVWAmjFzbr2fEf2vJqcVp3xa0Ukw72ayVozzd4Hyudg_6FuV__w57RN3KBXTUNiw55KHwy9dIW6IS-2ZJSJT7zfKuslHXsqOTCd03KxywfzGkeAbVl0u1Nw-Kb/s320/RS7644_ThinkstockPhotos-628516870.jpg');">
-    <div class="title wrap">
-      <h3>Earn with our referral program</h3>
-      <span class="circle" aria-hidden="true">↗</span>
+    <div class="band animate-in" style="--image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvEuAaKw5VQJldp61ZcOaUOngUMyAGvNVLEJ0faOihmJPOUnDxzAZFcgTg6qhyN40MpgTVWAmjFzbr2fEf2vJqcVp3xa0Ukw72ayVozzd4Hyudg_6FuV__w57RN3KBXTUNiw55KHwy9dIW6IS-2ZJSJT7zfKuslHXsqOTCd03KxywfzGkeAbVl0u1Nw-Kb/s320/RS7644_ThinkstockPhotos-628516870.jpg');">
+      <div class="title wrap">
+        <h3>Earn with our referral program</h3>
+        <span class="circle" aria-hidden="true">↗</span>
+      </div>
     </div>
-  </div>
-</section>
   </section>
 
   <!-- Projects -->
   <section class="wrap projects animate-in" id="work" aria-label="Projects">
-  <div class="header">
-    <div>
-      <div class="muted" style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.85rem;">Our</div>
-      <h2>Partnership offer</h2>
-    </div>
-    <a class="btn btn-ghost" href="#work">View All ↗</a>
-  </div>
-  <article class="grid">
-    <div class="card shadow-md">
-      <div class="ph" role="img" aria-label="Home cleaning service" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6c0LGJ9x5DQnO8UTIHoisxzdKhuCzhgnBBwYegGY7Ycue01L31_K2xx9yxgIulYjgl28nlOd_mMuAo20hS8gn33qPcI_YzaYCAozN1TuYqalPzmlYH6RgYSTPtoCEGKR28RfnHqwvNmojBtUCTY6mZT65rWmz4vDtHMolypmnBMmcvn7dil-QmRp-W82F/s320/Screenshot%202025-08-09%20145942.png');"></div>
-      <div class="view">
-        <div class="vip-label">platinum partnership</div>
-        <div class="pill">VIEW</div>
+    <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+      <div>
+        <div class="text-muted text-uppercase letter-spacing-2 small">Our</div>
+        <h2>Partnership Offer</h2>
       </div>
+      <a class="btn btn-ghost" href="#work">View All ↗</a>
     </div>
-    <div class="thumb-row">
-      <div class="card">
-        <div class="ph" role="img" aria-label="Office cleaning service" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwUwbCmbsJNdnffdIDtsyUoT-mmuuFhNK0mfvEO41pkCFRggraszrP0HcjU6T_xOPs0eOuJ1UnbpD2gKOne9ZqLOyNYsJryc2U9ZvPE89tjqezaURwb90629qIVOerbR3W4hY6KvXObZPlWIj3-cBcNTHNOPICRya8mU9ATiAUdrRDdU1hh4h5F6JFZRvO/s320/Screenshot%202025-08-09%20145901.png');"></div>
-        <div class="view">
-          <div class="vip-label">gold partnership</div>
-          <div class="pill">VIEW</div>
-        </div>
-      </div>
-      <div class="thumb-pair">
-        <div class="card">
-          <div class="ph small" role="img" aria-label="Post-construction cleaning" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGUj6ZOSJchz57_vg_kGF8J3_otYL5s6wNyq2Ia_Pt6XtSCWuKBqPNhzYXG7UExR6FYHccxL3br4A38iN6p_FIKP28HypZbeMrp2V1oyEWS9IssjpZR_hxT7uk7qQmeCQUue5WIoh0e-EJuoNFhFqWt-JMchQrDQw3HV_kzfnczGzja2ZL-Njry-vrSGnD/s320/Screenshot%202025-08-09%20145838.png');"></div>
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="card shadow-md border-0">
+          <div class="ph" role="img" aria-label="Home cleaning service" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6c0LGJ9x5DQnO8UTIHoisxzdKhuCzhgnBBwYegGY7Ycue01L31_K2xx9yxgIulYjgl28nlOd_mMuAo20hS8gn33qPcI_YzaYCAozN1TuYqalPzmlYH6RgYSTPtoCEGKR28RfnHqwvNmojBtUCTY6mZT65rWmz4vDtHMolypmnBMmcvn7dil-QmRp-W82F/s320/Screenshot%202025-08-09%20145942.png');"></div>
           <div class="view">
-            <div class="vip-label">VIP partnership</div>
-            <div class="pill">VIEW</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="ph small" role="img" aria-label="Referral program" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiywjglpf_5k5pnUBu2LhA92TGOcbWYhtYOjY8kLYNf3MBZlrcw_D1BzEKMn6Nd_o_1ggnQO4y8liGTWUBdvIiCU2wiG0woJdaoXAZOvvo-WCzGeG9YjZMiwkH0EEZ2zhjHCtDUs7D31xXD_bDyMqso0SyQaQBziKIg53DohrTRtSJ0YzIFthuvHZXAx7eX/s320/Screenshot%202025-08-09%20145754.png');"></div>
-          <div class="view">
-            <div class="vip-label">regular partnership</div>
+            <div class="vip-label">Platinum Partnership</div>
             <div class="pill">VIEW</div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="project-footer" style="grid-column: 1/-1;">
-      <p class="muted" style="max-width: 700px;">
-        We specialize in home and office cleaning, post-construction cleanup, and a unique referral program that rewards you for bringing in new clients. Our services are designed to be efficient, reliable, and tailored to your needs.
-      </p>
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <a class="btn btn-outline" href="#">services</a>
-        <a class="btn btn-outline" href="#contact">partnership</a>
+      <div class="col-lg-5 d-flex flex-column gap-4">
+        <div class="card shadow-md border-0">
+          <div class="ph" role="img" aria-label="Office cleaning service" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwUwbCmbsJNdnffdIDtsyUoT-mmuuFhNK0mfvEO41pkCFRggraszrP0HcjU6T_xOPs0eOuJ1UnbpD2gKOne9ZqLOyNYsJryc2U9ZvPE89tjqezaURwb90629qIVOerbR3W4hY6KvXObZPlWIj3-cBcNTHNOPICRya8mU9ATiAUdrRDdU1hh4h5F6JFZRvO/s320/Screenshot%202025-08-09%20145901.png');"></div>
+          <div class="view">
+            <div class="vip-label">Gold Partnership</div>
+            <div class="pill">VIEW</div>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card shadow-md border-0">
+              <div class="ph small" role="img" aria-label="Post-construction cleaning" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGUj6ZOSJchz57_vg_kGF8J3_otYL5s6wNyq2Ia_Pt6XtSCWuKBqPNhzYXG7UExR6FYHccxL3br4A38iN6p_FIKP28HypZbeMrp2V1oyEWS9IssjpZR_hxT7uk7qQmeCQUue5WIoh0e-EJuoNFhFqWt-JMchQrDQw3HV_kzfnczGzja2ZL-Njry-vrSGnD/s320/Screenshot%202025-08-09%20145838.png');"></div>
+              <div class="view">
+                <div class="vip-label">VIP Partnership</div>
+                <div class="pill">VIEW</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-md border-0">
+              <div class="ph small" role="img" aria-label="Referral program" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiywjglpf_5k5pnUBu2LhA92TGOcbWYhtYOjY8kLYNf3MBZlrcw_D1BzEKMn6Nd_o_1ggnQO4y8liGTWUBdvIiCU2wiG0woJdaoXAZOvvo-WCzGeG9YjZMiwkH0EEZ2zhjHCtDUs7D31xXD_bDyMqso0SyQaQBziKIg53DohrTRtSJ0YzIFthuvHZXAx7eX/s320/Screenshot%202025-08-09%20145754.png');"></div>
+              <div class="view">
+                <div class="vip-label">Regular Partnership</div>
+                <div class="pill">VIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+        <p class="text-muted" style="max-width: 700px;">
+          We specialize in home and office cleaning, post-construction cleanup, and a unique referral program that rewards you for bringing in new clients. Our services are designed to be efficient, reliable, and tailored to your needs.
+        </p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a class="btn btn-outline" href="#">Services</a>
+          <a class="btn btn-outline" href="#contact">Partnership</a>
+        </div>
       </div>
     </div>
-  </article>
-</section>
+  </section>
 
   <!-- Contact -->
-  <!-- Contact Section (Updated with Pop-Up) -->
-<section class="contact animate-in" id="contact" aria-label="Contact">
-  <div class="wrap contact-grid">
-    <div>
-      <div class="muted" style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.85rem;">contact us</div>
-      <h2 style="font-size: clamp(32px, 5vw, 52px); margin: 0.25rem 0 0;">join our leading team today </h2>
-      <p class="muted" style="margin-top: 0.75rem; max-width: 600px;">
-        Interested in partnering with us? Whether you have a project in mind or want to learn more about our services, we’d love to hear from you. sign up below or reach out via email or phone.
-      </p>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
-        <span>✉️ hey@mattered.co</span>
-        <span>📞 +1 (555) 123-4567</span>
+  <section class="contact animate-in" id="contact" aria-label="Contact">
+    <div class="wrap">
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="text-muted text-uppercase letter-spacing-2 small">Contact Us</div>
+          <h2>Join Our Leading Team Today</h2>
+          <p class="text-muted mt-3" style="max-width: 600px;">
+            Interested in partnering with us? Whether you have a project in mind or want to learn more about our services, we’d love to hear from you. Sign up below or reach out via email or phone.
+          </p>
+          <div class="d-flex gap-3 flex-wrap mt-3">
+            <span>✉️ hey@mattered.co</span>
+            <span>📞 +1 (555) 123-4567</span>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <form class="contact-form shadow-md border rounded" id="contactForm">
+            <div class="mb-3">
+              <label class="form-label" for="name">Name</label>
+              <input class="form-control rounded-pill" id="name" name="name" type="text" placeholder="Jane Doe" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-control rounded-pill" id="email" name="email" type="email" placeholder="you@company.com" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="referral_code">Referral Code</label>
+              <input class="form-control rounded-pill" id="referral_code" name="referral_code" type="text" placeholder="JaneDoe@1233" required />
+            </div>
+            <button class="btn" type="submit">Sign Up</button>
+          </form>
+        </div>
       </div>
     </div>
-    <form class="contact-form shadow-md" id="contactForm">
-      <div class="field">
-        <label class="label" for="name">Name</label>
-        <input class="input" id="name" name="name" type="text" placeholder="Jane Doe" required />
+    <!-- Pop-Up -->
+    <div id="successPopup" class="popup" role="dialog" aria-labelledby="popupTitle" aria-hidden="true">
+      <div class="popup-content">
+        <h3 id="popupTitle">Thank You!</h3>
+        <p>We will get back to you within 24hrs via email.</p>
+        <button class="btn" onclick="closePopup()">Close</button>
       </div>
-      <div class="field">
-        <label class="label" for="email">Email</label>
-        <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required />
-      </div>
-      <div class="field">
-        <label class="label" for="referral_code">Referral Code</label>
-        <input class="input" id="referral_code" name="referral_code" type="text" placeholder="JaneDoe@1233" required />
-      </div>
-      <button class="btn" type="submit">Sign up</button>
-    </form>
-  </div>
-  <!-- Pop-Up Container -->
-  <div id="successPopup" class="popup" role="dialog" aria-labelledby="popupTitle" aria-hidden="true">
-    <div class="popup-content">
-      <h3 id="popupTitle" style="font-size: clamp(24px, 3vw, 28px); margin: 0 0 16px; font-weight: 700;">Thank You!</h3>
-      <p style="margin: 0 0 24px; font-size: clamp(16px, 1.6vw, 18px);">
-        We will get back to you within 24hrs via email.
-      </p>
-      <button class="btn" onclick="closePopup()">Close</button>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Add to Existing <style> Section -->
-<style>
-  /* Pop-Up Styles */
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  .popup.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  .popup-content {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: clamp(24px, 3vw, 32px);
-    max-width: min(90vw, 500px);
-    text-align: center;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    transform: translateY(20px);
-    animation: popupFadeIn 0.4s ease-out forwards;
-  }
-  .popup.active .popup-content {
-    animation: popupFadeIn 0.4s ease-out forwards;
-  }
-  @keyframes popupFadeIn {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-</style>
+  <!-- Bootstrap 5 JS and Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS
+    (function(){
+      emailjs.init("In6o5Js1aeQVDKbMn");
+    })();
 
-<!-- Updated JavaScript (Replace the <script> section) -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-  // Initialize EmailJS
-  (function(){
-    emailjs.init("In6o5Js1aeQVDKbMn"); // Replace with your EmailJS User ID
-  })();
+    // Scroll Progress
+    const progressBar = document.getElementById('progress');
+    const updateProgress = () => {
+      const { scrollHeight, clientHeight } = document.documentElement;
+      const scrollY = window.scrollY;
+      const height = scrollHeight - clientHeight;
+      const progress = height > 0 ? (scrollY / height) * 100 : 0;
+      progressBar.style.width = `${progress}%`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
 
-  // Scroll Progress
-  const progressBar = document.getElementById('progress');
-  const updateProgress = () => {
-    const { scrollHeight, clientHeight } = document.documentElement;
-    const scrollY = window.scrollY;
-    const height = scrollHeight - clientHeight;
-    const progress = height > 0 ? (scrollY / height) * 100 : 0;
-    progressBar.style.width = `${progress}%`;
-  };
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
+    // Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    const successPopup = document.getElementById('successPopup');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const name = formData.get('name') || 'friend';
+      const email = formData.get('email') || 'your email';
+      const referral_code = formData.get('referral_code') || 'none';
 
-  // Mobile Menu Toggle
-  const menuToggle = document.getElementById('menuToggle');
-  const drawer = document.getElementById('drawer');
-  menuToggle.addEventListener('click', () => {
-    drawer.classList.toggle('open');
-    menuToggle.setAttribute('aria-label', drawer.classList.contains('open') ? 'Close menu' : 'Open menu');
-  });
-
-  // Contact Form Submission
-  const contactForm = document.getElementById('contactForm');
-  const successPopup = document.getElementById('successPopup');
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(contactForm);
-    const name = formData.get('name') || 'friend';
-    const email = formData.get('email') || 'your email';
-    const referral_code = formData.get('referral_code') || 'none';
-
-    // Send email using EmailJS
-    emailjs.send('service_fgpqeua', 'template_lrz5o36', {
-      name: name,
-      email: email,
-      referral_code: referral_code
-    })
-    .then(() => {
-      // Show pop-up
-      successPopup.classList.add('active');
-      successPopup.setAttribute('aria-hidden', 'false');
-      // Focus on the pop-up for accessibility
-      successPopup.querySelector('button').focus();
-      contactForm.reset();
-    }, (error) => {
-      console.error('EmailJS error:', error);
-      alert(`Sorry, ${name}. There was an error sending your details. Please try again later.`);
+      emailjs.send('service_fgpqeua', 'template_lrz5o36', {
+        name: name,
+        email: email,
+        referral_code: referral_code
+      })
+      .then(() => {
+        successPopup.classList.add('active');
+        successPopup.setAttribute('aria-hidden', 'false');
+        successPopup.querySelector('button').focus();
+        contactForm.reset();
+      }, (error) => {
+        console.error('EmailJS error:', error);
+        alert(`Sorry, ${name}. There was an error sending your details. Please try again later.`);
+      });
     });
-  });
 
-  // Close Pop-Up
-  function closePopup() {
-    successPopup.classList.remove('active');
-    successPopup.setAttribute('aria-hidden', 'true');
-    // Return focus to the form's submit button
-    contactForm.querySelector('button[type="submit"]').focus();
-  }
-
-  // Close Pop-Up on Outside Click
-  successPopup.addEventListener('click', (e) => {
-    if (e.target === successPopup) {
-      closePopup();
+    // Close Pop-Up
+    function closePopup() {
+      successPopup.classList.remove('active');
+      successPopup.setAttribute('aria-hidden', 'true');
+      contactForm.querySelector('button[type="submit"]').focus();
     }
-  });
 
-  // Close Pop-Up on Escape Key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && successPopup.classList.contains('active')) {
-      closePopup();
-    }
-  });
-
-  // Footer Year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Intersection Observer for Animations
-  const elements = document.querySelectorAll('.animate-in');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animationDelay = `${entry.target.dataset.delay || 0}s`;
-        observer.unobserve(entry.target);
+    // Close Pop-Up on Outside Click
+    successPopup.addEventListener('click', (e) => {
+      if (e.target === successPopup) {
+        closePopup();
       }
     });
-  }, { threshold: 0.2 });
-  elements.forEach(el => observer.observe(el));
-</script>
+
+    // Close Pop-Up on Escape Key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && successPopup.classList.contains('active')) {
+        closePopup();
+      }
+    });
+
+    // Intersection Observer for Animations
+    const elements = document.querySelectorAll('.animate-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationDelay = `${entry.target.dataset.delay || 0}s`;
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    elements.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
